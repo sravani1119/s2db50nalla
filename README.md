@@ -1,8 +1,4 @@
-Class - vehicle class vehicles{ constructor(name, type, noofpassangers){
-     this.name = name;  
-    this.type = type;
-    this.noofpassangers = noofpassangers;
-    }
-    }
+s2db50nalla
 
+<https://s2db50nalla.herokuapp.com/>
 

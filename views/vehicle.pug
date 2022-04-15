@@ -2,11 +2,11 @@ extends layout
 
 block content
   h1= title
-  - let vehicles = [{name:"Ship", type:"WaterWay", noofpassengers: 100},{name:"Car", type:"RoadWay", noofpassengers: 80},{name:"Etihad", type:"Airways", noofpassengers: 150}]
+  - vehicles = results
   div(class="container-fluid") 
    div(class="row")
     each vehicle,index in vehicles
-        div(class="col-sm-2" onclick=`buy(${index+1})`) name: #{vehicle.name} , type: #{vehicle.type} , noofpassengers: #{vehicle.noofpassengers}
+        div(class="col-sm-2" onclick=`buy(${index+1})`) name: #{vehicle.name} , type: #{vehicle.type} , noofpassengers: #{vehicle.noofpassangers};
 
     script. 
      function buy(index)

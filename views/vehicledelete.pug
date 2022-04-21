@@ -1,0 +1,39 @@
+extends layout
+block content
+  h1= title
+  - let vehicleid = toShow._id
+  - let vehicle_name = toShow.name
+  - let vehicletype = toShow.type
+  - let noofpassengers = toShow.noofpassangers
+  div.row(class='mb-2')
+  div.mr-1 ID is
+  div #{vehicleid}
+  - let actionid = "/resource/resource/vehicles/" + vehicleid
+  form(id='vehicleForm', action= actionid, method="DELETE")
+    div.form-group
+      label.vehicleAttr(for='vehicle_name') vehicle name
+      input#vehicle_name(type='text', name='vehicle_name', value= vehicle_name )
+    div.form-group
+      label.vehicleAttr(for='vehicletype') vehicle type
+      input#vehicletype(type='text', name='vehicletype', value= vehicletype )
+    div.form-group
+      label.vehicleAttr(for='noofpassengers') noofpassengers
+      input#noofpassengers(type='number', name='noofpassengers', value= noofpassengers )
+      input(type="submit")
+  script.
+    document.forms['vehicleForm'].addEventListener('submit', (event) => {
+    event.preventDefault();
+    // TODO do something here to show user that form is being submitted
+    fetch(event.target.action, {
+    method: 'DELETE',
+    body: new URLSearchParams(new FormData(event.target)) // event.target is the form
+    }).then((resp) => {
+    return resp.json(); // or resp.text() or whatever the server sends
+    }).then((body) => {
+    alert("Delete succeded")
+    // TODO handle body
+    }).catch((error) => {
+    // TODO handle error
+    alert("Update failed " + error )
+    });
+    });

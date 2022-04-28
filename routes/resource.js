@@ -5,6 +5,16 @@ var api_controller = require('../controllers/api');
 var vehicle_controller = require('../controllers/vehicle');
 /// API ROUTE ///
 // GET resources base.
+
+// A little function to check if we have an authorized user and continue on
+// redirect to login.
+const secured = (req, res, next) => {
+if (req.user){
+return next();
+}
+req.session.returnTo = req.originalUrl;
+res.redirect("/login");
+}
 router.get('/resource', api_controller.api);
 /// vehicle ROUTES ///
 // POST request for creating a vehicle.
@@ -23,11 +33,11 @@ router.get('/resource/vehicles', vehicle_controller.vehicle_list);
 router.get('/detail', vehicle_controller.vehicle_view_one_Page);
 
 /* GET create vehicle page */
-router.get('/create', vehicle_controller.vehicle_create_Page);
+router.get('/create', secured, vehicle_controller.vehicle_create_Page);
 
 /* GET create update page */
-router.get('/update', vehicle_controller.vehicle_update_Page);
+router.get('/update', secured, vehicle_controller.vehicle_update_Page);
 
 /* GET delete vehicle page */
-router.get('/delete', vehicle_controller.vehicle_delete_Page);
+router.get('/delete', secured, vehicle_controller.vehicle_delete_Page);
 module.exports = router;
